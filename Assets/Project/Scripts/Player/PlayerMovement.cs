@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 /// <summary>
 ///  PlayerMovement Controller 
@@ -7,15 +8,19 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private Camera mCamer;
+    private Animator animator;
     private PlayerController inputControls;
+    private bool isRunning;
     [Header(" Movement Info")]
     private Vector3 moveDir;
-    [SerializeField] private float verticalSpeed;
-    [SerializeField] private float movementSpeed;
     private Vector2 moveInput;
+    private float speed;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float runspeed;
+
     [Header(" Aim Info")]
     private Vector2 aimInput;
-    private Camera mCamer;
     [SerializeField] private LayerMask airLayerMark;
     private Vector3 lookInDirection;
     [SerializeField] private float rotationSpeed;
@@ -28,19 +33,52 @@ public class PlayerMovement : MonoBehaviour
         //Aim 
         inputControls.Character.Aim.performed += context => aimInput = context.ReadValue<Vector2>();
         inputControls.Character.Aim.canceled += context => aimInput = Vector2.zero;
+        //Running 
+        inputControls.Character.Run.performed += context =>
+        {
+            if (moveDir.magnitude > 0)
+            {
+                speed = runspeed;
+                isRunning = true;
+            }
+
+        };
+        inputControls.Character.Run.canceled += context =>
+        {
+            speed = walkSpeed;
+            isRunning = false;
+        };
         mCamer = Camera.main;
+        animator = GetComponentInChildren<Animator>();
 
 
+    }
+    private void Start()
+    {
+        speed = walkSpeed;
     }
 
     private void Update()
     {
         ApplyMovement();
-        ApplyMouseLookAt();
+        AimAt();
+        AnimationControllerForPlayer();
+
 
     }
 
-    private void ApplyMouseLookAt()
+    private void AnimationControllerForPlayer()
+    {
+        float xVelocity = Vector3.Dot(moveDir.normalized, transform.right);
+        float zVelocity = Vector3.Dot(moveDir.normalized, transform.forward);
+
+
+        animator.SetFloat("xvelocity", xVelocity, 0.1f, Time.deltaTime);
+        animator.SetFloat("zvelocity", zVelocity, 0.1f, Time.deltaTime);
+        animator.SetBool("IsRunning", isRunning);
+    }
+
+    private void AimAt()
     {
         Ray ray = mCamer.ScreenPointToRay(aimInput);
         if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, airLayerMark))
@@ -60,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveDir.magnitude > 0)
         {
-            transform.position += moveDir * Time.deltaTime * movementSpeed;
+            transform.position += moveDir * Time.deltaTime * speed;
         }
     }
 
