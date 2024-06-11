@@ -5,8 +5,8 @@ using static UnityEngine.Application;
 using static UnityEditor.AssetDatabase;
 using UnityEditor.PackageManager;
 
-using UnityEngine;
-using UnityEditor.PackageManager.Requests;
+
+
 
 namespace avinash
 {
@@ -41,9 +41,10 @@ namespace avinash
         [MenuItem(" Tools/Setup /Add Remove Necessary Package  ")]
         public static void AddVisualStudioCode()
         {
-            string[] apackages = { "com.unity.ide.visualstudio", "com.unity.textmeshpro" };
+            string[] apackages = { "com.unity.ide.visualstudio", "com.unity.textmeshpro", "com.unity.inputsystem" };
             string[] rpackages = { "com.unity.visualscripting", "com.unity.ide.rider", "com.unity.timeline" };
             Client.AddAndRemove(apackages, rpackages);
+
 
             Resolve();
 
