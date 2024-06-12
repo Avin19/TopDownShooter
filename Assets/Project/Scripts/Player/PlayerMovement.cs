@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header(" Aim Info")]
     private Vector2 aimInput;
+    [SerializeField] private Transform aim;
     [SerializeField] private LayerMask airLayerMark;
     private Vector3 lookInDirection;
     [SerializeField] private float rotationSpeed;
@@ -99,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
             lookInDirection.Normalize();
 
             transform.forward = Vector3.Slerp(transform.forward, lookInDirection, rotationSpeed * Time.deltaTime);
+            aim.position = new Vector3(hitInfo.point.x, transform.position.y + 1.75f, hitInfo.point.z);
 
         }
     }
