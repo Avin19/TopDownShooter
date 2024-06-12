@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private Player player;
     private Camera mCamer;
     private Animator animator;
     private PlayerController inputControls;
@@ -26,10 +27,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     private void Awake()
     {
-        inputControls = new PlayerController();
+        player = GetComponent<Player>();
         mCamer = Camera.main;
         animator = GetComponentInChildren<Animator>();
+
+    }
+    private void Start()
+    {
+        inputControls = player.GetPlayerController();
         AssignInputMethod();
+        speed = walkSpeed;
     }
 
     private void AssignInputMethod()
@@ -55,10 +62,7 @@ public class PlayerMovement : MonoBehaviour
         };
     }
 
-    private void Start()
-    {
-        speed = walkSpeed;
-    }
+
 
     private void Update()
     {
@@ -109,14 +113,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        inputControls.Enable();
-    }
-    private void OnDisable()
-    {
-        inputControls.Disable();
-    }
+
+
 }
 
 
