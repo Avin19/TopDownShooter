@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void AssignInputMethod()
     {
+        //Fire 
+        inputControls.Character.Fire.performed += context => Shoot();
         //Movement 
         inputControls.Character.Movement.performed += context => moveInput = context.ReadValue<Vector2>();
         inputControls.Character.Movement.canceled += context => moveInput = Vector2.zero;
@@ -77,6 +79,10 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("zvelocity", zVelocity, 0.1f, Time.deltaTime);
         bool isAnimationRunning = isRunning && moveDir.magnitude > 0;
         animator.SetBool("IsRunning", isAnimationRunning);
+    }
+    private void Shoot()
+    {
+        animator.SetTrigger("Fire");
     }
 
     private void AimAt()
