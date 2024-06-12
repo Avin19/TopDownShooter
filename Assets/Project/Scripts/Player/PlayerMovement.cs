@@ -27,6 +27,13 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         inputControls = new PlayerController();
+        mCamer = Camera.main;
+        animator = GetComponentInChildren<Animator>();
+        AssignInputMethod();
+    }
+
+    private void AssignInputMethod()
+    {
         //Movement 
         inputControls.Character.Movement.performed += context => moveInput = context.ReadValue<Vector2>();
         inputControls.Character.Movement.canceled += context => moveInput = Vector2.zero;
@@ -36,23 +43,16 @@ public class PlayerMovement : MonoBehaviour
         //Running 
         inputControls.Character.Run.performed += context =>
         {
-            if (moveDir.magnitude > 0)
-            {
-                speed = runspeed;
-                isRunning = true;
-            }
-
+            speed = runspeed;
+            isRunning = true;
         };
         inputControls.Character.Run.canceled += context =>
         {
             speed = walkSpeed;
             isRunning = false;
         };
-        mCamer = Camera.main;
-        animator = GetComponentInChildren<Animator>();
-
-
     }
+
     private void Start()
     {
         speed = walkSpeed;
@@ -75,7 +75,8 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("xvelocity", xVelocity, 0.1f, Time.deltaTime);
         animator.SetFloat("zvelocity", zVelocity, 0.1f, Time.deltaTime);
-        animator.SetBool("IsRunning", isRunning);
+        bool isAnimationRunning = isRunning && moveDir.magnitude > 0;
+        animator.SetBool("IsRunning", isAnimationRunning);
     }
 
     private void AimAt()
