@@ -83,6 +83,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2900332464130123917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2648313709646194144}
+  m_Layer: 0
+  m_Name: GunAinPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2648313709646194144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2900332464130123917}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0378, y: 0.0364, z: 0.6852}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1918826094622913464}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5655197848226503439
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,13 +167,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1918826094622913464}
+  - component: {fileID: 8979996635654723104}
   m_Layer: 0
   m_Name: Weapon_SniperRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1918826094622913464
 Transform:
   m_ObjectHideFlags: 0
@@ -160,8 +192,22 @@ Transform:
   - {fileID: 1395095334036533374}
   - {fileID: 8421630147474180}
   - {fileID: 8042822427258786122}
+  - {fileID: 2648313709646194144}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -16.177, z: 0}
+--- !u!114 &8979996635654723104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473922326019998850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f8afacd3b4f484eb2808bb32f2726a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firingPoint: {fileID: 2648313709646194144}
 --- !u!1 &7673642450566835309
 GameObject:
   m_ObjectHideFlags: 0

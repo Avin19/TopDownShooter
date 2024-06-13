@@ -19,10 +19,14 @@ public class GameService : MonoBehaviour
     [Header("View")]
     //view
     [SerializeField] private WeaponView weaponView;
+    //Perfabs
+    [Header("Perfabs")]
+    [SerializeField] private Transform pfBullet;
+
 
     private void Start()
     {
-        weaponController = new WeaponController(weaponView, weaponList);
+        weaponController = new WeaponController(weaponView, weaponList, pfBullet);
     }
 }
 

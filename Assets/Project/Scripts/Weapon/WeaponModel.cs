@@ -9,6 +9,9 @@ public class WeaponModel : ScriptableObject
     public Transform pfWeapon;
     public int damage;
 
+
+
+
 }
 
 

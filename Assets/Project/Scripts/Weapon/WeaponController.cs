@@ -13,13 +13,15 @@ public class WeaponController
     private Transform[] weapons;
     private Animator animator;
     private Transform activateWeapon;
+    private Transform pfBullet;
     private int activateWeaponCount = 0;
 
-    public WeaponController(WeaponView _weaponView, WeaponList _weaponList)
+    public WeaponController(WeaponView _weaponView, WeaponList _weaponList, Transform _pfBullet)
     {
         this.weaponView = _weaponView;
         weaponView.SetWeaponController(this);
         this.weaponList = _weaponList;
+        this.pfBullet = _pfBullet;
 
     }
 
@@ -52,26 +54,20 @@ public class WeaponController
         activateWeaponCount++;
         activateWeapon = weapons[activateWeaponCount];
         SetActiveWeapon();
-
-
     }
     public void SetAnimationLayer()
     {
-        Debug.Log(activateWeaponCount);
+        animator.SetBool("busyGrabbing", true);
         for (int i = 1; i < animator.layerCount; i++)
         {
             animator.SetLayerWeight(i, 0);
         }
         if (activateWeaponCount <= 2)
         {
-
-
             animator.SetLayerWeight(1, 1);
         }
         else if (activateWeaponCount == 3)
         {
-
-
             animator.SetLayerWeight(2, 1);
         }
         else
@@ -79,17 +75,21 @@ public class WeaponController
             animator.SetLayerWeight(3, 1);
         }
 
+        // weapontype grab is remaining 
+
     }
 
     public void Shoot()
     {
         animator.SetTrigger("Fire");
+
+        GameObject bullet = GameObject.Instantiate(pfBullet, activateWeapon.GetComponent<Weapon>().GetFiringPointOfGun().position, Quaternion.identity).gameObject;
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        rb.velocity += activateWeapon.GetComponent<Weapon>().GetFiringPointOfGun().forward * 20f;
     }
-    public void ReloadWeapon(Transform _rig)
+    public void ReloadWeapon()
     {
         animator.SetTrigger("Reload");
-        _rig.GetComponent<Rig>().weight = 0;
-
 
     }
 

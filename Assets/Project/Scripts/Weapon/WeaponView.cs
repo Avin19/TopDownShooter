@@ -11,12 +11,14 @@ public class WeaponView : MonoBehaviour
 {
     private WeaponController controller;
     [SerializeField] private Transform[] weaponsTransfrom;
+
     [SerializeField] private Transform leftHand_IK;
     [SerializeField] private Transform rig;
     private Player player;
     private PlayerController inputActions;
     private Animator animator;
     private bool resetRig = false;
+    private bool resetGrabRig = false;
     private Rig rigWright;
 
     private void Awake()
@@ -32,12 +34,18 @@ public class WeaponView : MonoBehaviour
         rigWright = rig.GetComponent<Rig>();
         controller.SetAnimator(animator);
         controller.SetPistol();
-        inputActions.Character.ChangeWeapon.performed += context => controller.ChangeWeapon();
+        inputActions.Character.ChangeWeapon.performed += context =>
+        {
+            rigWright.weight = 0f;
+            resetGrabRig = true;
+            controller.ChangeWeapon();
+        };
         inputActions.Character.Fire.performed += context => controller.Shoot();
         inputActions.Character.Reload.performed += context =>
         {
-            controller.ReloadWeapon(rig);
+            rigWright.weight = 0f;
             resetRig = true;
+            controller.ReloadWeapon();
         };
     }
 
@@ -54,9 +62,15 @@ public class WeaponView : MonoBehaviour
         {
             rigWright.weight += 0.05f * Time.deltaTime;
         }
+        if (resetGrabRig && rigWright.weight < 1)
+        {
+            rigWright.weight += 1f * Time.deltaTime;
+        }
         if (rigWright.weight == 1)
         {
             resetRig = false;
+            resetGrabRig = false;
+            animator.SetBool("busyGrabbing", false);
         }
     }
     public Animator GetAnimator() => animator;
