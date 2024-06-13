@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 02f3489395f268346bcacb8c6e677607
+guid: cf35b9e6dab3bfb4ab37ebb455d786d5
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -36,18 +36,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Sniper-Rifle Fire Idle
+      name: Weapon Grab - Side
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 0.68
+      lastFrame: 71
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 0
