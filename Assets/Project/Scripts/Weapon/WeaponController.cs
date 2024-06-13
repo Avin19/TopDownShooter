@@ -1,5 +1,6 @@
-using System;
+
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 /// <summary>
 ///  
 /// </summary>
@@ -84,6 +85,15 @@ public class WeaponController
     {
         animator.SetTrigger("Fire");
     }
+    public void ReloadWeapon(Transform _rig)
+    {
+        animator.SetTrigger("Reload");
+        _rig.GetComponent<Rig>().weight = 0;
+
+
+    }
+
+
     public void SetAnimator(Animator _animator)
     {
         animator = weaponView.GetAnimator();

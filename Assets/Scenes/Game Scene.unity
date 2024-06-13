@@ -1049,7 +1049,7 @@ MonoBehaviour:
     m_SourceObjects:
       m_Length: 1
       m_Item0:
-        transform: {fileID: 0}
+        transform: {fileID: 858841046}
         weight: 1
       m_Item1:
         transform: {fileID: 0}
@@ -1970,6 +1970,7 @@ MonoBehaviour:
   - {fileID: 15676171}
   - {fileID: 875100787}
   leftHand_IK: {fileID: 932458338}
+  rig: {fileID: 1966000089}
 --- !u!4 &3074623041028098302
 Transform:
   m_ObjectHideFlags: 0

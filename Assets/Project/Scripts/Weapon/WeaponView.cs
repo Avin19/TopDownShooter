@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 /// <summary>
 ///  Wweapon MVC View 
@@ -11,9 +12,12 @@ public class WeaponView : MonoBehaviour
     private WeaponController controller;
     [SerializeField] private Transform[] weaponsTransfrom;
     [SerializeField] private Transform leftHand_IK;
+    [SerializeField] private Transform rig;
     private Player player;
     private PlayerController inputActions;
     private Animator animator;
+    private bool resetRig = false;
+    private Rig rigWright;
 
     private void Awake()
     {
@@ -25,16 +29,16 @@ public class WeaponView : MonoBehaviour
     {
 
         WeaponsTransfromList();
-
+        rigWright = rig.GetComponent<Rig>();
         controller.SetAnimator(animator);
         controller.SetPistol();
-        inputActions.Character.ChangeWeapon.performed += context =>
-        {
-
-            controller.ChangeWeapon();
-
-        };
+        inputActions.Character.ChangeWeapon.performed += context => controller.ChangeWeapon();
         inputActions.Character.Fire.performed += context => controller.Shoot();
+        inputActions.Character.Reload.performed += context =>
+        {
+            controller.ReloadWeapon(rig);
+            resetRig = true;
+        };
     }
 
     public void SetWeaponController(WeaponController _controller) => this.controller = _controller;
@@ -44,7 +48,19 @@ public class WeaponView : MonoBehaviour
         this.leftHand_IK.localPosition = _leftHand_IK.localPosition;
         this.leftHand_IK.localRotation = _leftHand_IK.localRotation;
     }
+    private void Update()
+    {
+        if (resetRig && rigWright.weight < 1)
+        {
+            rigWright.weight += 0.05f * Time.deltaTime;
+        }
+        if (rigWright.weight == 1)
+        {
+            resetRig = false;
+        }
+    }
     public Animator GetAnimator() => animator;
+
 }
 
 
