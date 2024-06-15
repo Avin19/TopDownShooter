@@ -82,10 +82,10 @@ public class WeaponController
     public void Shoot()
     {
         animator.SetTrigger("Fire");
-
-        GameObject bullet = GameObject.Instantiate(pfBullet, activateWeapon.GetComponent<Weapon>().GetFiringPointOfGun().position, Quaternion.identity).gameObject;
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.velocity += activateWeapon.GetComponent<Weapon>().GetFiringPointOfGun().forward * 20f;
+        Transform gunAimPoint = activateWeapon.GetComponent<Weapon>().GetFiringPointOfGun();
+        GameObject bullet = GameObject.Instantiate(pfBullet, gunAimPoint.position, Quaternion.LookRotation(gunAimPoint.forward)).gameObject;
+        bullet.GetComponent<Rigidbody>().velocity = activateWeapon.GetComponent<Weapon>().GetFiringPointOfGun().forward * 20f;
+        GameObject.Destroy(bullet, 5f);
     }
     public void ReloadWeapon()
     {
