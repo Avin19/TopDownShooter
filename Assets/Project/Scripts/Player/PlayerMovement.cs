@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
             lookInDirection.Normalize();
 
             transform.forward = Vector3.Slerp(transform.forward, lookInDirection, rotationSpeed * Time.deltaTime);
-            aim.position = new Vector3(hitInfo.point.x, transform.position.y + 1.75f, hitInfo.point.z);
+            aim.position = new Vector3(hitInfo.point.x, transform.position.y + 2f, hitInfo.point.z);
 
         }
     }
