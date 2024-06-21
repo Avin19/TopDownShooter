@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6837941792834829915}
   - component: {fileID: 535195787629915388}
   - component: {fileID: 4691623164164691319}
+  - component: {fileID: 1164169172366402012}
   m_Layer: 0
   m_Name: desert_stone_2
   m_TagString: Untagged
@@ -83,3 +84,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1164169172366402012
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047034830903276056}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7141285, y: 0.7607554, z: 1.0632687}
+  m_Center: {x: 0.016278267, y: 0.3634231, z: 0.012181282}

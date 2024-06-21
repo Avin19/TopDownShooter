@@ -15,3 +15,5 @@ MonoBehaviour:
   pfWeapon: {fileID: 5749781007597927690, guid: d76fcead6cf4e4f4aae8aeda1f3c2487,
     type: 3}
   damage: 15
+  maxAmmo: 6
+  weapontype: 2

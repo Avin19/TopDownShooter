@@ -15,4 +15,5 @@ MonoBehaviour:
   pfWeapon: {fileID: 3755859669737488930, guid: 2906d4b9d10fcea4fba168cd9c356dd6,
     type: 3}
   damage: 10
-  leftHand_IK: {fileID: 0}
+  maxAmmo: 30
+  weapontype: 3
