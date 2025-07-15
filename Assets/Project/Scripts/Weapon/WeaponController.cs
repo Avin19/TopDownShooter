@@ -1,6 +1,5 @@
 
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 /// <summary>
 ///  
 /// </summary>
@@ -35,6 +34,7 @@ public class WeaponController
     }
     private void SetActiveWeapon()
     {
+
         activateWeapon.gameObject.SetActive(true);
         weaponView.SetLeftHandIK(weapons[activateWeaponCount].GetComponentInChildren<LeftHandIKscript>().transform);
         SetAnimationLayer();
@@ -75,7 +75,7 @@ public class WeaponController
             animator.SetLayerWeight(3, 1);
         }
 
-        // weapontype grab is remaining 
+
 
     }
 

@@ -9,7 +9,6 @@ public class GameService : MonoBehaviour
 {
     //Services
 
-    private PlayerService playerService;
     //controller 
     private WeaponController weaponController;
     [Header("ScriptableObject")]

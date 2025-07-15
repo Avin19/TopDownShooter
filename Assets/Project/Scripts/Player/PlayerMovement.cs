@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [Header(" Aim Info")]
     private Vector2 aimInput;
     [SerializeField] private Transform aim;
-    [SerializeField] private LayerMask airLayerMark;
+    [SerializeField] private LayerMask aimLayerMark;
     private Vector3 lookInDirection;
     [SerializeField] private float rotationSpeed;
     private void Awake()
@@ -89,14 +89,14 @@ public class PlayerMovement : MonoBehaviour
     private void AimAt()
     {
         Ray ray = mCamer.ScreenPointToRay(aimInput);
-        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, airLayerMark))
+        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, aimLayerMark))
         {
-            lookInDirection = hitInfo.point - transform.position;
+            lookInDirection = hitInfo.point - transform.position; // direction to look in 
             lookInDirection.y = 0f;
             lookInDirection.Normalize();
 
             transform.forward = Vector3.Slerp(transform.forward, lookInDirection, rotationSpeed * Time.deltaTime);
-            aim.position = new Vector3(hitInfo.point.x, transform.position.y + 2f, hitInfo.point.z);
+            aim.position = new Vector3(hitInfo.point.x, hitInfo.point.y + 1f, hitInfo.point.z);
 
         }
     }
