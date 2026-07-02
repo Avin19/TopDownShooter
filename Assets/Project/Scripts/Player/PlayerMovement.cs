@@ -22,7 +22,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header(" Aim Info")]
     private Vector2 aimInput;
-    [SerializeField] private LayerMask airLayerMark;
+    [SerializeField] private Transform aim;
+    [SerializeField] private LayerMask aimLayerMark;
     private Vector3 lookInDirection;
     [SerializeField] private float rotationSpeed;
     private void Awake()
@@ -41,8 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void AssignInputMethod()
     {
-        //Fire 
-        inputControls.Character.Fire.performed += context => Shoot();
+
         //Movement 
         inputControls.Character.Movement.performed += context => moveInput = context.ReadValue<Vector2>();
         inputControls.Character.Movement.canceled += context => moveInput = Vector2.zero;
@@ -84,21 +84,19 @@ public class PlayerMovement : MonoBehaviour
         bool isAnimationRunning = isRunning && moveDir.magnitude > 0;
         animator.SetBool("IsRunning", isAnimationRunning);
     }
-    private void Shoot()
-    {
-        animator.SetTrigger("Fire");
-    }
+
 
     private void AimAt()
     {
         Ray ray = mCamer.ScreenPointToRay(aimInput);
-        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, airLayerMark))
+        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, aimLayerMark))
         {
-            lookInDirection = hitInfo.point - transform.position;
+            lookInDirection = hitInfo.point - transform.position; // direction to look in 
             lookInDirection.y = 0f;
             lookInDirection.Normalize();
 
             transform.forward = Vector3.Slerp(transform.forward, lookInDirection, rotationSpeed * Time.deltaTime);
+            aim.position = new Vector3(hitInfo.point.x, hitInfo.point.y + 1f, hitInfo.point.z);
 
         }
     }

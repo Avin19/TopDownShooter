@@ -12,5 +12,7 @@ In "Echoes of the Forgotten," you play as A.R.I.S., an advanced exploration robo
 - [x] New Input System
 - [x] Animation Blend tree 
 - [x] Charcter Controller 
+- [x] Walk / Run Animation , Animation Mask , Animation Layer 
+- [x] Animation Rigging  , multi aim Constraint 
 
 

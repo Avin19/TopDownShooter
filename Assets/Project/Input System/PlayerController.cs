@@ -62,6 +62,24 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""3b6163af-fcc2-4ddf-bf03-69e5a58f3559"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""49185ef0-cbae-4cef-ae85-d059240465f8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,6 +225,28 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0fda910e-075e-4330-81c9-17e506cbad1a"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55b65fd7-90cd-4b80-80c7-9680b8d59fe0"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -219,6 +259,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Character_Movement = m_Character.FindAction("Movement", throwIfNotFound: true);
         m_Character_Aim = m_Character.FindAction("Aim", throwIfNotFound: true);
         m_Character_Run = m_Character.FindAction("Run", throwIfNotFound: true);
+        m_Character_ChangeWeapon = m_Character.FindAction("ChangeWeapon", throwIfNotFound: true);
+        m_Character_Reload = m_Character.FindAction("Reload", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -284,6 +326,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_Movement;
     private readonly InputAction m_Character_Aim;
     private readonly InputAction m_Character_Run;
+    private readonly InputAction m_Character_ChangeWeapon;
+    private readonly InputAction m_Character_Reload;
     public struct CharacterActions
     {
         private @PlayerController m_Wrapper;
@@ -292,6 +336,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Character_Movement;
         public InputAction @Aim => m_Wrapper.m_Character_Aim;
         public InputAction @Run => m_Wrapper.m_Character_Run;
+        public InputAction @ChangeWeapon => m_Wrapper.m_Character_ChangeWeapon;
+        public InputAction @Reload => m_Wrapper.m_Character_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -313,6 +359,12 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
+            @ChangeWeapon.started += instance.OnChangeWeapon;
+            @ChangeWeapon.performed += instance.OnChangeWeapon;
+            @ChangeWeapon.canceled += instance.OnChangeWeapon;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
         }
 
         private void UnregisterCallbacks(ICharacterActions instance)
@@ -329,6 +381,12 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
+            @ChangeWeapon.started -= instance.OnChangeWeapon;
+            @ChangeWeapon.performed -= instance.OnChangeWeapon;
+            @ChangeWeapon.canceled -= instance.OnChangeWeapon;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
         }
 
         public void RemoveCallbacks(ICharacterActions instance)
@@ -352,5 +410,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnChangeWeapon(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
 }

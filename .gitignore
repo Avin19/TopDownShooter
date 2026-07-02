@@ -11,7 +11,8 @@
 /[Uu]ser[Ss]ettings/
 /[Oo]ut/
 /[Aa]ssets/Project/Editor/
-/[Aa]ssets/project/Models/
+/[Aa]ssets/Project/Models/
+/[Aa]ssets/Hovl Studio/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
